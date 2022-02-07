@@ -1,0 +1,52 @@
+<html>
+    <header>
+        <title>Dogs API</title>
+        <link rel="stylesheet" href="style.css">
+    </header>
+    <body>
+        <div id="Loader"></div>
+        <div class="container">
+            <select id="listaCani">
+                <option> </option>
+            </select>
+            <div id="immaginiCani">
+
+            </div>
+        </div>
+        <script>
+            function DogList(api)
+            {
+                let dog = api.message
+                for (let index = 0; index < dog.length; index++) {
+                    const AddDog = dog[index];
+
+                        let Html = `<option values="${AddDog}">${AddDog}</option>`
+                        document.getElementById('listaCani').innerHTML+= Html;
+                    }
+                console.log("Finito")
+            }
+                const url = 'https://dog.ceo/api/breeds/list'
+                fetch(url)
+                .then((api) => api.json())
+                .then(api =>DogList(api))
+
+            const url = 'https://dog.ceo/api/breeds/images'
+                fetch(url)
+                .then((api) => api.json())
+                .then((api) => () => {
+                    document.getElementById('immaginiCani').innerHTML="";
+                    for (let index = 0; index < api.length; index++) {
+                        const ImgDog = api[index];
+                        let Html = `<img src="${ImgDog}"></img>`
+                        document.getElementById('immaginiCani').innerHTML+= Html;
+                    }
+                    let Html = `<option values="${AddDog}">${AddDog}</option>`
+                        document.getElementById('listaCani').innerHTML+= Html;
+                })
+
+
+
+                
+        </script>
+    </body>
+</html>
